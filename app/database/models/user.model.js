@@ -64,6 +64,34 @@ const userSchema = mongoose.Schema(
             enum: ["ACTIVE", "DELETED"],
             default: "ACTIVE",
         },
+        role: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Roles",
+        },
+        password: {
+            type: String,
+            trim: true,
+            minLength: 5,
+            required: true,
+            validate(value) {
+                const isValidpassword = validator.isStrongPassword(value, {
+                    minLength: 8,
+                    minLowercase: 1,
+                    minUppercase: 1,
+                    minNumbers: 1,
+                    minSymbols: 1,
+                    returnScore: false,
+                });
+                if (!isValidpassword) {
+                    throw new Error("invalid password format");
+                }
+            },
+        },
+        tokens: [
+            {
+                token: { type: String, required: true },
+            },
+        ],
     },
     {
         collection: "users",
