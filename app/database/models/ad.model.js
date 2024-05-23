@@ -32,6 +32,11 @@ const adSchema = new mongoose.Schema(
             default: false,
             required: true,
         },
+        createdBy: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: [true, "CreatedBy is required"],
+        },
     },
     {
         collection: "ads",
