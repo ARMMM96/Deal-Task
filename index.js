@@ -1,4 +1,6 @@
-const app = require('./app/app')
+const colors = require('colors');
+require("dotenv").config()
+const app = require('./app/app');
 
 app.listen(process.env.PORT, () =>
 	console.log(
