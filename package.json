@@ -1,0 +1,19 @@
+{
+  "name": "deal-be-task",
+  "version": "1.0.0",
+  "description": "Develop a matching system that connects property requests with relevant ads based on specific criteria. We have 3 resources Property request: when you need to rent or buy a property you make a request on the application with your specific needs and there are real estate agents on the application they will contact you to get what you need Ad: agents can create ads for clients who want to rent or buy a property User: client: the user who can make requests Agent: the user who can make ads Admin: a super admin who can do anything",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ARMMM96/Deal-Task.git"
+  },
+  "author": "Ahmed Rabie Mahmoud Mohamed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ARMMM96/Deal-Task/issues"
+  },
+  "homepage": "https://github.com/ARMMM96/Deal-Task#readme"
+}
