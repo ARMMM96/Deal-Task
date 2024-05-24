@@ -99,6 +99,53 @@ const userSchema = mongoose.Schema(
     }
 );
 
+// Hide user credentials data
+userSchema.methods.toJSON = function () {
+    const user = this.toObject();
+    deletedElements = ["__v", "password", "tokens"];
+    deletedElements.forEach((element) => {
+        delete user[element];
+    });
+    return user;
+};
+
+// Static method to find user by credentials (email or phone number)
+userSchema.statics.findByCredentials = async (identifier, password) => {
+    let user;
+    if (identifier.includes("@")) {
+        // Assume identifier is an email
+        user = await User.findOne({ email: identifier });
+    } else {
+        // Assume identifier is a phone number
+        user = await User.findOne({ phoneNumber: identifier });
+    }
+
+    if (!user) {
+        throw new Error("Invalid email or phone number");
+    }
+
+    const isPasswordMatch = await bcryptjs.compare(password, user.password);
+    if (!isPasswordMatch) {
+        throw new Error("Invalid password");
+    }
+
+    return user;
+};
+
+// Instance method to generate authentication token
+userSchema.methods.generateAuthToken = function () {
+    const user = this;
+    const token = jwt.sign(
+        {
+            _id: user._id.toString(),
+            role: user.role,
+        },
+        process.env.TOKEN_SECRET,
+        { expiresIn: "1h" } // Set an appropriate expiry time
+    );
+
+    return token;
+};
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
