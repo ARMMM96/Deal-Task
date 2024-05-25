@@ -19,9 +19,11 @@ class UserController {
 
     static async login(req, res) {
         try {
-            const { phone, password } = req.body;
-            const { user, token } = await UserService.login(phone, password);
-
+            const { phoneNumber, password } = req.body;
+            const { user, token } = await UserService.login(
+                phoneNumber,
+                password
+            );
             Helper.responseHandler(
                 res,
                 200,
