@@ -113,6 +113,25 @@ class PropertyController {
             Helper.responseHandler(res, 400, false, null, error.message);
         }
     }
+    static async getUserStatistics(req, res) {
+        try {
+            const userId = req.params.userId;
+
+            // Get user statistics from the property service
+            const userStats = await PropertyService.getUserStatistics(userId);
+
+            // Return response
+            Helper.responseHandler(
+                res,
+                200,
+                true,
+                userStats,
+                "User statistics retrieved successfully"
+            );
+        } catch (error) {
+            Helper.responseHandler(res, 500, false, null, error.message);
+        }
+    }
 }
 
 module.exports = PropertyController;
