@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const jwt = require("jsonwebtoken");
+const bcryptjs = require("bcryptjs");
 
 const userSchema = mongoose.Schema(
     {
@@ -78,6 +80,12 @@ const userSchema = mongoose.Schema(
     }
 );
 
+userSchema.pre("save", async function () {
+    if (this.isModified("password")) {
+        this.password = await bcryptjs.hash(this.password, 8);
+    }
+});
+
 // Hide user credentials data
 userSchema.methods.toJSON = function () {
     const user = this.toObject();
@@ -91,6 +99,7 @@ userSchema.methods.toJSON = function () {
 // Static method to find user by credentials (email or phone number)
 userSchema.statics.findByCredentials = async (identifier, password) => {
     let user;
+
     if (identifier.includes("@")) {
         // Assume identifier is an email
         user = await User.findOne({ email: identifier });
@@ -104,6 +113,7 @@ userSchema.statics.findByCredentials = async (identifier, password) => {
     }
 
     const isPasswordMatch = await bcryptjs.compare(password, user.password);
+
     if (!isPasswordMatch) {
         throw new Error("Invalid password");
     }
@@ -119,7 +129,7 @@ userSchema.methods.generateAuthToken = function () {
             _id: user._id.toString(),
             role: user.role,
         },
-        process.env.TOKEN_SECRET,
+        process.env.tokenPassword,
         { expiresIn: "1h" } // Set an appropriate expiry time
     );
 
