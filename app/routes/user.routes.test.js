@@ -1,7 +1,7 @@
 const request = require("supertest");
-const app = require("../app"); // Ensure this is the correct path to your Express app
+const app = require("../app");
 const mongoose = require("mongoose");
-const User = require("../database/models/user.model"); // Ensure this is the correct path to your User model
+const User = require("../database/models/user.model");
 
 describe("User API", () => {
     beforeAll(async () => {
