@@ -6,6 +6,7 @@ const connectDB = require("./database/connection");
 const userRoutes = require("./routes/user.routes");
 const route = require("./routes/route.routes");
 const roleRoutes = require("./routes/role.routes");
+const propertyRoutes = require("./routes/property.routes");
 
 app.use(cors());
 app.use(express.json());
@@ -15,5 +16,6 @@ connectDB();
 app.use("/api/users", userRoutes);
 app.use("/api/routes", route);
 app.use("/api/roles", roleRoutes);
+app.use("/api/properties", propertyRoutes);
 
 module.exports = app;
