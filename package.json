@@ -1,31 +1,39 @@
 {
-  "name": "deal-be-task",
-  "version": "1.0.0",
-  "description": "Develop a matching system that connects property requests with relevant ads based on specific criteria. We have 3 resources Property request: when you need to rent or buy a property you make a request on the application with your specific needs and there are real estate agents on the application they will contact you to get what you need Ad: agents can create ads for clients who want to rent or buy a property User: client: the user who can make requests Agent: the user who can make ads Admin: a super admin who can do anything",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ARMMM96/Deal-Task.git"
-  },
-  "author": "Ahmed Rabie Mahmoud Mohamed",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ARMMM96/Deal-Task/issues"
-  },
-  "homepage": "https://github.com/ARMMM96/Deal-Task#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "colors": "^1.4.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "express-list-endpoints": "^7.1.0",
-    "express-rate-limit": "^7.2.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.4.0",
-    "validator": "^13.12.0"
-  }
+    "name": "deal-be-task",
+    "version": "1.0.0",
+    "description": "Develop a matching system that connects property requests with relevant ads based on specific criteria. We have 3 resources Property request: when you need to rent or buy a property you make a request on the application with your specific needs and there are real estate agents on the application they will contact you to get what you need Ad: agents can create ads for clients who want to rent or buy a property User: client: the user who can make requests Agent: the user who can make ads Admin: a super admin who can do anything",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "setupFiles": ["<rootDir>/jest.setup.js"]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ARMMM96/Deal-Task.git"
+    },
+    "author": "Ahmed Rabie Mahmoud Mohamed",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ARMMM96/Deal-Task/issues"
+    },
+    "homepage": "https://github.com/ARMMM96/Deal-Task#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "colors": "^1.4.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "express-list-endpoints": "^7.1.0",
+        "express-rate-limit": "^7.2.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.4.0",
+        "validator": "^13.12.0"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^7.0.0"
+    }
 }
