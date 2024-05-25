@@ -122,7 +122,7 @@ userSchema.statics.findByCredentials = async (identifier, password) => {
 };
 
 // Instance method to generate authentication token
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = async function () {
     const user = this;
     const token = jwt.sign(
         {
@@ -132,6 +132,8 @@ userSchema.methods.generateAuthToken = function () {
         process.env.tokenPassword,
         { expiresIn: "1h" } // Set an appropriate expiry time
     );
+    user.tokens = user.tokens.concat({ token });
+    await user.save();
 
     return token;
 };
