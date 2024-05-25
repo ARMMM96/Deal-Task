@@ -106,6 +106,28 @@ class RouteController {
             Helper.responseHandler(res, 500, false, null, error.message);
         }
     }
+
+    static extractRoutes(app) {
+        const routes = [];
+        app._router.stack.forEach((middleware) => {
+            if (middleware.route) {
+                // Routes registered directly on the app
+                routes.push(middleware.route);
+            } else if (middleware.name === "router") {
+                // Router middleware
+                middleware.handle.stack.forEach((handler) => {
+                    let route = handler.route;
+                    route && routes.push(route);
+                });
+            }
+        });
+        return routes;
+    }
+
+    static async initializeRoutes(app) {
+        const routes = this.extractRoutes(app);
+        await RouteService.saveRoutesToDatabase(routes);
+    }
 }
 
 module.exports = RouteController;
